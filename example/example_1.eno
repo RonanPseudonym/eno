@@ -1,0 +1,30 @@
+<format id : #style>
+	<+ &sign
+		color : blue => black => null
+		italic : yes 
+	>
+<!format>
+
+<format id : #fallback>
+	<&sign>
+<!format>
+
+<main format : #style => #fallback>
+	<bold>
+		<big scale : 2>
+			Testing Testing
+		<!big>
+	<!bold>
+
+	This is a demo of an html-inspired markup language for building tk guis.
+
+	It's structured with tags like \<bold> and \<em>
+
+	<&n>
+
+	Okay bye!
+
+	<sign>Name<!sign>
+	<button @click : $[terminate()]>Bye<!button>
+
+<!main>

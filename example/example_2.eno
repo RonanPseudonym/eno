@@ -1,0 +1,12 @@
+<format id : #main_format>
+	<+ &quit_button
+		width      : span
+		text_color : red
+		@click     : $terminate
+	>
+<!format>
+
+<main format : #main_format>
+	Hello World!
+	<quit_button>Quit<!quit_button>
+<!main>

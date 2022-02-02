@@ -1,0 +1,91 @@
+ForeignCharInTag:
+  type: SyntaxError 
+  message: The character '{cchar}' is invalid in a tag
+  tooltip: Did you forget to close your tag? Only logic characters for operators, and alphanumeric and underscore characters for names, are allowed in a tag.  
+  code: 200
+EqualsNotValidCharacter:
+  type: SyntaxError
+  message: The character '=' is only valid in a tag when used in '=>'
+  tooltip: Unlike HTML, eno handles assignment with colons (:), not equal signs. Maybe you meant to use one of those?
+  code: 200
+OpeningMultipleTags:
+  type: LexemeOrderError
+  message: You cannot create a new tag inside of an existing tag
+  tooltip: You may have forgot to put a closing bracket before opening a new one. Alternatively, if you're trying to nest tags, something like <foo <bar>> is invalid syntax. You may have meant <foo><bar>?
+  code: 200
+TagEmpty:
+  type: TagConventionError
+  message: Your tag contains no name
+  tooltip: You forgot to specify a name for your tag. Whitespace is not considered a valid name, and is stripped at runtime.
+  code: 200
+ClosingTypedef:
+  type: TagConventionError
+  message: You cannot both create and close a tag
+  tooltip: When you use '!', you're specifying that you're closing a tag (much like HTML's '/'.) When you use +, you're specifying that you're creating a new tag, usually in <format>. If you want to create a new tag and then close it, it can be done like <+ foo><!bar>, but at no point would you use '+!'.
+  code: 200
+ClosingDemitag:
+  type: TagConventionError
+  message: You cannot close a demitag, by definition
+  tooltip: When you use & in a tag, you're denoting that it doesn't close, sort of like HTML's <br> tags. I call these demitags, because it makes etymological sense, and also sounds cool. By definition, closing a demitag with '!' is impossible, synonymous with something like </br> in HTML.
+  code: 200
+EventNotValidName:
+  type: TagConventionError
+  message: You cannot use an event as a name
+  tooltip: "An 'event' is text that starts with @. Events are usually used in things like buttons, so that you can say '@on_press : $foo', and the like. Any lone event is interpreted as an attempt to assign the name of your tag, and a tag named after an event is invalid. Maybe you forgot to add an equality, or simply tried to name your tag an event?"
+  code: 200
+MultipleNamesInvalid:
+  type: TagConventionError
+  message: A tag can have only one name
+  tooltip: You tried to give a tag multiple names, but only one is valid. Any standalone text is interpreted as a name, so maybe you forgot to assign an equality? Spaces denote the end of a name in eno, so using them in the name of your tag is also invalid.
+  code: 200
+TagAlreadyMarked:
+  type: TagConventionWarning
+  message: You repeated {char} twice
+  tooltip: Defining characters, like '+' '&' and '!', are only valid when used once (preferably at the beginning) of a tag.
+  code: 200
+CharacterOrder:
+  type: TagConventionWarning
+  message: Defining characters like {char} should be before your tag name
+  tooltip: Having defining characters at the beginning of your tag is preferred syntax
+  code: 100
+InvalidTagClosing:
+  type: DomOrderError
+  message: Unable to close tag
+  tooltip: You failed to close the currently open tag, '{copen}', and instead tried to close '{cclose}'. You need to close '{copen}' first.
+  code: 200
+
+NoArgumentsSpecified:
+  type: CommandLineError
+  message: You didn't specify any arguments with which to run eno
+  tooltip: If you're installing this for the first time, try running "eno install". If you want to see a list of all arguments, use "eno help".
+  code: 200
+InvalidArgument:
+  type: CommandLineError
+  message: '"{arg}" is not a valid argument'
+  tooltip: To get a list of all arguments, use "eno help"
+  code: 200
+NoMoreArgumentsPossible:
+  type: CommandLineError
+  message: '"{arg}" could not be added because there are no more possible arguments'
+  tooltip: You've reached the maximum number of arguments, which is usually 1. Maybe you meant to use an optional argument prefixing this one, denoted like "--foo"? If you're unsure, use "eno help" to see what arguments are valid in this command.
+  code: 200
+CommandLineIntegerInvalid:
+  type: TypeError
+  message: '"{arg}" is not a valid integer'
+  tooltip: Integers cannot contain decimals, and are unsigned (no negative signs are valid.) Are you sure you meant to put an integer there?
+  code: 200
+IntegerOutOfRange:
+  type: CommandLineError
+  message: 'The integer you used, "{arg}", is not within the range of {arg2} required for this argument'
+  tooltip: '"eno help --cmd [command name]" can give you more information about optional paramaters like this'
+  code: 200
+NotEnoughArguments:
+  type: CommandLineError
+  message: "You didn't include enough arguments ({arg} required)"
+  tooltip: 'When you run, for example "eno foo -bar a", a is an argument of the optional paramater bar, and only foo is an argument of the main command. Maybe you messed up somewhere there?'
+  code: 200
+OptionalArgumentLeftOpen:
+  type: CommandLineError
+  message: 'You forgot to specify a value for the "{arg}" paramater'
+  tooltip: Some flags, like --visible, don't require anything after them. They turn stuff on and off. The flag you used isn't one of those. It requires something after it for the parser to actually make sense of it, like '--color red'. By itself, something like '--color' is useless.
+  code: 200

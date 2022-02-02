@@ -1,0 +1,35 @@
+NoArgumentsSpecified:
+  type: CommandLineError
+  message: You didn't specify any arguments with which to run eno
+  tooltip: If you're installing this for the first time, try running "eno install". If you want to see a list of all arguments, use "eno help".
+  fatal: true
+InvalidArgument:
+  type: CommandLineError
+  message: '"{arg}" is not a valid argument'
+  tooltip: To get a list of all arguments, use "eno help"
+  fatal: true
+NoMoreArgumentsPossible:
+  type: CommandLineError
+  message: '"{arg}" could not be added because there are no more possible arguments'
+  tooltip: You've reached the maximum number of arguments, which is usually 1. Maybe you meant to use an optional argument prefixing this one, denoted like "--foo"? If you're unsure, use "eno help" to see what arguments are valid in this command.
+  fatal: true
+CommandLineIntegerInvalid:
+  type: TypeError
+  message: '"{arg}" is not a valid integer'
+  tooltip: Integers cannot contain decimals, and are unsigned (no negative signs are valid.) Are you sure you meant to put an integer there?
+  fatal: true
+IntegerOutOfRange:
+  type: CommandLineError
+  message: 'The integer you used, "{arg}", is not within the range of {arg2} required for this argument'
+  tooltip: '"eno help --cmd [command name]" can give you more information about optional paramaters like this'
+  fatal: true
+NotEnoughArguments:
+  type: CommandLineError
+  message: "You didn't include enough arguments ({arg} required)"
+  tooltip: 'When you run, for example "eno foo -bar a", a is an argument of the optional paramater bar, and only foo is an argument of the main command. Maybe you messed up somewhere there?'
+  fatal: true
+OptionalArgumentLeftOpen:
+  type: CommandLineError
+  message: 'You forgot to specify a value for the "{arg}" paramater'
+  tooltip: Some flags, like --visible, don't require anything after them. They turn stuff on and off. The flag you used isn't one of those. It requires something after it for the parser to actually make sense of it, like '--color red'. By itself, something like '--color' is useless.
+  fatal: true
